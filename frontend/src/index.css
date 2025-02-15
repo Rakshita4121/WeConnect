@@ -1,5 +1,90 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+body{
+  background-color: white;
+  font-family: "Plus Jakarta Sans",sans-serif;
+  flex-grow: 1;
+  background: linear-gradient(to left, rgba(26, 248, 78, 0.4), rgba(255, 255, 192, 1));
+}
+
+.navborder:hover{
+  border-bottom: 2px solid #28A745;
+}
+.navbar{
+  height: 4.1rem;
+  background-color:white;
+  padding-right: 10px;
+  padding-left: 20px;
+  border-bottom: 1px solid #05de38;
+}
+.nav-link{
+  line-height: 3.2rem;
+  margin-right:5px ;
+}
+.nav-link:hover{
+  color:#2E8B57;
+}
+
+ul {
+  list-style: none; 
+  padding-left: 0;  
+}
+
+ul li {
+  position: relative;
+  font-size: 18px; /* Adjust text size */
+  padding-left: 40px; /* Space for custom bullet */
+}
+
+ul li::before {
+  content: "✔";
+  font-size: 18px; 
+  font-weight: bold;
+  color: white; 
+  background-color: #28A745; 
+  width: 24px; 
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 5px;
+
+}
+
+.features-container{
+  margin:60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.featuresimage{
+  width: 500px;
+  height: 450px;
+}
+@media (max-width: 768px) { 
+  .featuresimg-responsive {
+      width: 300px;
+      height: auto;
+  }
+  .features-container{
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+  }
+}
+.testimonial-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 330px;
+  height: 170px;
+  border-radius: 10px;
+  border: 1px solid #28A745;
+  cursor: pointer;
+}
+.testimonial-card:hover{
+  box-shadow: 50px 50px 100px 5px rgba(17, 197, 32, 0.2);
 }
