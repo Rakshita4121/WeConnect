@@ -19,8 +19,8 @@ function Navbar() {
             </button>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div className="navbar-nav ms-auto">
-                    <a className="nav-link  navborder" href="#">SignIn</a>
-                    <a className="nav-link  navborder" href="#">Login</a>
+                    <a className="nav-link  navborder" href="/signup">SignUp</a>
+                    <a className="nav-link  navborder" href="/login">Login</a>
                     <a className="nav-link navborder">Events</a>
                     <a className="nav-link navborder">Announcements</a>
                     <a className="nav-link  navborder">News</a>

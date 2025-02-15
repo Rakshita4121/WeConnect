@@ -88,3 +88,7 @@ ul li::before {
 .testimonial-card:hover{
   box-shadow: 50px 50px 100px 5px rgba(17, 197, 32, 0.2);
 }
+.form-font{
+  font-size: 18px;
+  font-weight: 500;
+}
