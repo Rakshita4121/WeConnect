@@ -21,11 +21,11 @@ function Navbar() {
                 <div className="navbar-nav ms-auto">
                     <a className="nav-link  navborder" href="/signup">SignUp</a>
                     <a className="nav-link  navborder" href="/login">Login</a>
-                    <a className="nav-link navborder">Events</a>
+                    <a className="nav-link navborder" href="/events">Events</a>
                     <a className="nav-link navborder">Announcements</a>
                     <a className="nav-link  navborder">News</a>
                     <a className="nav-link  navborder">Local Businesses</a>
-                    <a className="nav-link  navborder">Organisations</a>
+                    <a className="nav-link  navborder" href="/organizations">Organisations</a>
                 </div>
             </div>
         </div>
