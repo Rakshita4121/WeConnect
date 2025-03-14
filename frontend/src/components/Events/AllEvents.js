@@ -6,8 +6,7 @@ const AllEvents = () => {
   useEffect(()=>{
     axios.get("http://localhost:3002/events").then((res)=>{
       setAllEvents(res.data)
-      
-    })
+      })
     .catch(error => console.error("Error fetching events:", error));
   },[])
   return(
