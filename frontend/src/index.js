@@ -18,6 +18,10 @@ import CreateOrganizationForm from './components/Organizations/CreateOrganizatio
 import EditOrganizationForm from './components/Organizations/EditOrganizationForm'
 import CreateLocalBusinessForm from './components/LocalBusinesses/CreateBusiness';
 import EditLocalBusinessForm from './components/LocalBusinesses/EditBusiness';
+import AnnouncementsPage from './pages/Announcements';
+import CreateAnnouncement from './components/Announcements/CreateAnnouncement'
+import NewsPage from './pages/News'
+import CreateNews from './components/News/CreateNews'
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <div>
@@ -39,6 +43,10 @@ root.render(
             <Route path='/localbusinesses/new' element={<CreateLocalBusinessForm/>} />
             <Route path='/localbusinesses/:id' element={<LocalBusinessDetails/>} />
             <Route path='/localbusinesses/:id/edit' element={<EditLocalBusinessForm/>} />
+            <Route path="/announcements" element={<AnnouncementsPage/>} />
+            <Route path='/announcements/new' element={<CreateAnnouncement/>} />
+            <Route path="/news" element={<NewsPage/>} />
+            <Route path='/news/new' element={<CreateNews/>} />
           </Routes>
       
       </BrowserRouter>

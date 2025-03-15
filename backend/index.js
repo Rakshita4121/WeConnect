@@ -31,6 +31,8 @@ app.use(express.urlencoded({ extended: true }));
 const events=require("../backend/routes/events");
 const organizations=require("../backend/routes/organizations");
 const localbusinesses = require("../backend/routes/localbusinesses");
+const announcements = require("../backend/routes/announcements")
+const news=require("../backend/routes/news")
 app.use("/events",events)
 app.use("/organizations",organizations)
 app.use("/localbusinesses",localbusinesses);
