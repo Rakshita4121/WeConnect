@@ -19,7 +19,7 @@ const AllLocalBusinesses = () => {
   return (
     <div>
       <h2>Local Businesses</h2>
-      <Link to={`/localbusinesses/new`}>Register New Business</Link>
+      <Link to={`/localbusinesses/new`} >Register New Business</Link>
       <ul>
         {localBusinesses.map((business) => (
           <li key={business._id}>

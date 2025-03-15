@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const LocalBusinessDetail = () => {
-  const { id } = useParams(); // Get the business ID from the URL
+  const { id } = useParams(); 
   const [business, setBusiness] = useState(null);
 
   useEffect(() => {
