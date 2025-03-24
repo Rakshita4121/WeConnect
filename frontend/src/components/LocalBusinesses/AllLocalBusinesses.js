@@ -1,7 +1,13 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import TopSection from "../genral/TopSection";
+import image1 from "../../assets/getimg_ai_img-GxykPKpPpM9MEvPRj0iYQ.jpeg"
+import image2 from "../../assets/getimg_ai_img-H534QPQ56qGOtJzCFCJXw.jpeg"
+import image3 from "../../assets/getimg_ai_img-t1jkE3N0laok5miDaDHPE.jpeg"
+import image4 from "../../assets/getimg_ai_img-0lsqCXQHwIksIkoXtbx4N.jpeg"
+import image5 from "../../assets/getimg_ai_img-RyQAYSNnIjZsZ3odqemJS.jpeg"
+import image6 from "../../assets/getimg_ai_img-m9pnPGHs6BGk8oP4gTKjW.jpeg"
 const AllLocalBusinesses = () => {
   const [localBusinesses, setLocalBusinesses] = useState([]);
 
@@ -17,32 +23,33 @@ const AllLocalBusinesses = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Local Businesses</h2>
-      <Link to={`/localbusinesses/new`} >Register New Business</Link>
-      <ul>
+    <div style={{ background: "white", paddingBottom: "60px"}}>
+      <TopSection image1={image1} image2={image2} image3={image3} image4={image4} image5={image5} image6={image6}/>
+      <h2 className="text-center" style={{ fontSize: "38px", fontWeight: "bold", color: "green", textAlign: "center", paddingTop: "40px", textShadow: "2px 2px 5px rgba(0,0,0,0.2)" }}>
+         Local Businesses 
+      </h2>
+      <div className="grid">
         {localBusinesses.map((business) => (
-          <li key={business._id}>
-            <Link to={`/localbusinesses/${business._id}`}>
-              <h3>{business.name}</h3>
-            </Link>
-            <p>{business.description}</p>
-            <p><strong>Contact Email:</strong> {business.contactEmail}</p>
-            <p><strong>Phone:</strong> {business.contactPhone}</p>
-            {business.website && (
-              <p>
-                <strong>Website:</strong>{" "}
-                <a href={business.website} target="_blank" rel="noopener noreferrer">
-                  {business.website}
-                </a>
-              </p>
-            )}
-            {business.logo && (
-              <img src={business.logo} alt={`${business.name} logo`} width="100" />
-            )}
-          </li>
+          <div className="card" key={business._id}>
+                <h3>{business.name}</h3>
+              <p>{business.description}</p>
+              {business.website && (
+                <p>
+                  <strong>Website:</strong>{" "}
+                  <a href={business.website} target="_blank" rel="noopener noreferrer">
+                    {business.website}
+                  </a>
+                </p>
+              )}
+              <Link to={`/localbusinesses/${business._id}`}>
+                <button className="explore-button">Explore...</button>
+              </Link>
+          </div>
         ))}
-      </ul>
+      </div>
+      <div style={{textAlign:"center"}}>
+      <Link to = {`/localbusinesses/new`}><button className="explore-button">Create New Business</button></Link>
+      </div>
     </div>
   );
 };

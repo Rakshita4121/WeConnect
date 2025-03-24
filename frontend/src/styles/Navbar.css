@@ -1,0 +1,185 @@
+/* Navbar Styles */
+.navbar {
+    background: white;
+    border-radius: 30px;
+    box-shadow: 0 10px 10px rgba(6, 5, 5, 0.1);
+    position: fixed;
+    top: 10px;
+    left: 5%;
+    right: 5%;
+    width: 90%;
+    max-width: 1200px;
+    padding: 15px 20px; /* Increased padding for better spacing */
+    display: flex;
+    align-items: center; /* Ensures vertical centering */
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+/* Navbar container */
+.navbar-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px; /* Adds spacing */
+    height: 40px;
+}
+
+/* Logo */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: green;
+    text-decoration: none;
+}
+
+/* Navigation Links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding-top:16px ;
+}
+.nav-links li a {
+    text-decoration: none;
+    color: green;
+    font-size: 20px;
+}
+
+/* Authentication Buttons */
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.login-btn, .signup-btn {
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.login-btn {
+    background: #f0f0f0;
+    color: black;
+}
+
+.signup-btn {
+    background: green;
+    color: white;
+}
+
+/* Mobile Menu */
+.menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Sidebar */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 250px;
+    background: white;
+    padding: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.sidebar-links {
+    list-style: none;
+    margin-top: 20px;
+    padding: 0;
+}
+
+.sidebar-links li {
+    padding: 10px 0;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+}
+.profile-img {
+    width: 40px; /* Adjust the size as needed */
+    height: 40px;
+    border-radius: 50%; /* Makes it round */
+    object-fit: cover; /* Ensures the image is properly scaled */
+    border: 2px solid #4CAF50; /* Optional: Adds a border */
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.profile-img:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-links, .auth-buttons {
+        display: none;
+    }
+    .menu-btn {
+        display: block;
+    }
+    .navbar {
+        max-width: 700px;
+        width: 98%;
+        left: 2%;
+        right: 1%;
+        padding: 10px 15px; /* Adjusted for better fit */
+    }
+}
+@media (max-width: 370px) {
+    .navbar {
+        max-width: 310px;
+        width: 98%;
+        left: 2%;
+        right: 1%;
+        padding: 10px 15px; /* Adjusted for better fit */
+    }
+}
+@media (max-width: 1040px) {
+    .nav-links, .auth-buttons {
+        display: none;
+    }
+    .menu-btn {
+        display: block;
+    }
+    .navbar {
+        max-width: 1000px;
+        width: 98%;
+        left: 2%;
+        right: 1%;
+        padding: 10px 15px; /* Adjusted for better fit */
+    }
+}

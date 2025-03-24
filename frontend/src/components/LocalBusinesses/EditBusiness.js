@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams ,useNavigate} from "react-router-dom";
 import axios from "axios";
+import image from "../../assets/getimg_ai_img-GxykPKpPpM9MEvPRj0iYQ.jpeg"
 
 
 const EditLocalBusinessForm = () => {
@@ -52,8 +53,12 @@ const EditLocalBusinessForm = () => {
   };
 
   return (
-    <div className="row" style={{ margin: "4% 6%" }}>
-      <div className="col-lg-6 col-sm-10 offset-lg-3 offset-sm-1">
+    <div className="row" style={{ padding:"110px 6%",background:`linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.7)), url(${image})`,backgroundRepeat:"no-repeat",backgroundSize:"cover"}}>
+      <div className="col-lg-6 col-sm-10 offset-lg-3 offset-sm-1"  style={{border: "2px solid green", borderRadius:"20px",
+            padding: "3%", 
+            boxShadow: "0px 15px 25px rgba(62, 218, 62, 0.4)", 
+            transform: "translateY(-10px)",
+            transition: "all 0.3s ease-in-out" }}>
         <h2 style={{ marginBottom: "20px" }}>Edit Local Business</h2>
         <form onSubmit={handleSubmit} className="needs-validation" noValidate>
           <div className="mb-3">
@@ -158,7 +163,7 @@ const EditLocalBusinessForm = () => {
             />
           </div>
 
-          <button type="submit" className="btn btn-success">
+          <button type="submit" className="btn btn-success" style={{fontSize:"20px",fontWeight:"bold"}}>
             Update Business
           </button>
         </form>

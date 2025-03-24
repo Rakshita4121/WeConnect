@@ -1,0 +1,10 @@
+.announcement-container{
+    display: flex;
+    gap:20px;
+    flex-wrap: wrap;
+    padding: 10%;
+}
+.announcement-card{
+    width:300px;
+    height: 300px;
+}

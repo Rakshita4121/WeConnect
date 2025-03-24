@@ -1,0 +1,50 @@
+.top-container {
+    width: 100vw;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("../assets/getimg_ai_img-GxykPKpPpM9MEvPRj0iYQ.jpeg") no-repeat center center/cover;
+    background-size: cover; 
+    padding: 100px 5%;
+  }
+  
+  /* Ensure only blur effect, not duplicated background */
+  .top-container::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1); /* Light overlay for blur */
+    filter: blur(8px);
+    z-index: 0;
+  }
+  
+  /* Ensure form is on top */
+  .custom-form{
+    position: relative;
+    width: 450px;
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent */
+    padding: 100px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+  }
+  
+  
+  /* Button Styling */
+  .custom-form button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background-color: #ff6b6b;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .custom-form button:hover {
+    background-color: #ff4f4f;
+  }
+  

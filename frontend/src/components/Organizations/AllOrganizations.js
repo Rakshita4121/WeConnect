@@ -1,6 +1,13 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import {Link} from "react-router-dom"
+import TopSection from "../genral/TopSection";
+import image1 from "../../assets/getimg_ai_img-GxykPKpPpM9MEvPRj0iYQ.jpeg"
+import image2 from "../../assets/getimg_ai_img-H534QPQ56qGOtJzCFCJXw.jpeg"
+import image3 from "../../assets/getimg_ai_img-t1jkE3N0laok5miDaDHPE.jpeg"
+import image4 from "../../assets/getimg_ai_img-0lsqCXQHwIksIkoXtbx4N.jpeg"
+import image5 from "../../assets/getimg_ai_img-RyQAYSNnIjZsZ3odqemJS.jpeg"
+import image6 from "../../assets/getimg_ai_img-m9pnPGHs6BGk8oP4gTKjW.jpeg"
 const AllOrganizations = () => {
   const [allOrganizations, setAllOrganizations] = useState([]);
 
@@ -12,24 +19,32 @@ const AllOrganizations = () => {
 
   return (
     <div>
-      <h2>Organizations in Prakrutinagar, Kadapa</h2>
-      <Link to = {`/organizations/new`}>Create New Organization</Link>
-      <ul>
-        {allOrganizations.map(org => (
-          <li key={org._id} style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px" }}>
-            <Link to={`/organizations/${org._id}`}>
-              <h3>{org.name}</h3>
-            </Link>
-            
-            <p>{org.description}</p>
-            <p><strong>Email:</strong> {org.contactEmail}</p>
-            <p><strong>Phone:</strong> {org.contactPhone}</p>
-            <p><strong>Address:</strong> {org.address}</p>
-            {org.website && <p><a href={org.website} target="_blank" rel="noopener noreferrer">Visit Website</a></p>}
-            {org.logo && <img src={org.logo} alt={org.name} width="100" />}
-          </li>
+      <TopSection image1={image1} image2={image2} image3={image3} image4={image4} image5={image5} image6={image6}/>
+      <h2 className="text-center" style={{ fontSize: "38px", fontWeight: "bold", color: "green", textAlign: "center", paddingTop: "40px", textShadow: "2px 2px 5px rgba(0,0,0,0.2)" }}>
+         Organizations 
+      </h2>
+      <div className="grid">
+        {allOrganizations.map((organization) => (
+          <div className="card" key={organization._id}>
+                <h3>{organization.name}</h3>
+              <p>{organization.description}</p>
+              {organization.website && (
+                <p>
+                  <strong>Website:</strong>{" "}
+                  <a href={organization.website} target="_blank" rel="noopener noreferrer">
+                    {organization.website}
+                  </a>
+                </p>
+              )}
+              <Link to={`/organizations/${organization._id}`}>
+                <button className="explore-button">Explore...</button>
+              </Link>
+          </div>
         ))}
-      </ul>
+      </div>
+      <div style={{textAlign:"center"}}>
+      <Link to = {`/organizations/new`}><button className="explore-button">Create New Organization</button></Link>
+      </div>
     </div>
   );
 };
