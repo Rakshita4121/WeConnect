@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom"; 
 import HomePage from './pages/Home';
+import { AuthProvider } from "./context/AuthContext";
 import './index.css';
 import Navbar from './layouts/Navbar';
 import SignUp from './pages/signup';
@@ -26,6 +27,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <div>
       <BrowserRouter>
+      <AuthProvider>
         <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -48,7 +50,7 @@ root.render(
             <Route path="/news" element={<NewsPage/>} />
             <Route path='/news/new' element={<CreateNews/>} />
           </Routes>
-      
+          </AuthProvider>
       </BrowserRouter>
   </div>
 

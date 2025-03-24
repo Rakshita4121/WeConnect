@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-const categories = ["All", "Politics", "Business", "Sports", "Technology", "Health", "Entertainment", "General"];
-
+import "../../styles/news.css"
+const categories = ["All", "Politics", "Business", "Sports", "Technology", "Health", "Entertainment"];
+import image from "../../assets/getimg_ai_img-0lsqCXQHwIksIkoXtbx4N.jpeg"
 const AllNews = () => {
   const [news, setNews] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -29,11 +29,63 @@ const AllNews = () => {
   };
 
   return (
-    <div>
+    <div style={{paddingTop:"80px"}}>
+        <h2 style={{color:"green",fontSize:"38px",fontWeight:"bold",paddingTop:"20px",textAlign:"center"}}>Latest News</h2>
+        <div style={{display:"flex",justifyContent:"center",flexWrap:"wrap"}}>
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => setSelectedCategory(category)}
+            style={{
+              width:"150px",
+              margin: "5px",
+              padding: "10px",
+              backgroundColor: selectedCategory === category ? "#4CAF50" : "#ccc",
+              color: "#fff",
+              border: "none",
+              cursor: "pointer",
+              textAlign:"center",
+              fontSize:"18px",
+              fontWeight:"bold",
+              borderRadius:"20px",
+            }}
+            className="category-btn"
+          >
+            {category}
+          </button>
+          ))}
+        </div>
+        <div style={{textAlign:"center",paddingBottom:"20px"}}>
+      <Link to = {`/news/new`}><button className="explore-button">Post News</button></Link>
+      </div>
+        <div className="news-container">
+     {news.map((article) => (
+      <div key={article._id} className="news-card">
+      {article.image && (
+        <div className="news-image">
+          <img src={image} alt="News" />
+        </div>
+      )}
+      <div className="news-content">
+        <h3>{article.headline}</h3>
+        <p>{article.content}</p>
+        <p><strong>Author:</strong> {article.author}</p>
+        <p><strong>Published Date:</strong> {new Date(article.datePublished).toDateString()}</p>
+      </div>
+      
+      </div>
+      ))}
+    </div>
+    </div>
+  );
+};
+
+export default AllNews;
+{/* <div>
       <h2>Latest News</h2>
       <Link to={`/news/new`}>Post News</Link>
 
-      {/* Category Filter Buttons */}
+      
       <div>
         {categories.map((category) => (
           <button
@@ -71,8 +123,4 @@ const AllNews = () => {
           </li>
         ))}
       </ul>
-    </div>
-  );
-};
-
-export default AllNews;
+    </div> */}

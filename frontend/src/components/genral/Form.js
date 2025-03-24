@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import "../../styles/form.css"
 const FormComponent = ({ fields, initialState, onSubmit, buttonText }) => {
     const [formData, setFormData] = useState(initialState);
 
@@ -13,10 +13,11 @@ const FormComponent = ({ fields, initialState, onSubmit, buttonText }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="needs-validation" noValidate>
+        <div>
+            <form onSubmit={handleSubmit} className="needs-validation" noValidate>
             {fields.map((field) => (
                 <div className="mb-3" key={field.name}>
-                    <label htmlFor={field.name} className="form-label">
+                    <label htmlFor={field.name} className="form-label" style={{fontSize:"20px",fontWeight:"bold"}}>
                         {field.label}
                     </label>
                     {field.type === "textarea" ? (
@@ -28,6 +29,7 @@ const FormComponent = ({ fields, initialState, onSubmit, buttonText }) => {
                             value={formData[field.name]}
                             onChange={handleChange}
                             required
+                            style={{border:"1px solid black",color:"green",fontWeight:"800",fontSize:"18px"}}
                         />
                     ) : (
                         <input
@@ -39,12 +41,15 @@ const FormComponent = ({ fields, initialState, onSubmit, buttonText }) => {
                             value={formData[field.name]}
                             onChange={handleChange}
                             required
+                            style={{border:"1px solid black",color:"green",fontWeight:"800",fontSize:"18px"}}
                         />
                     )}
                 </div>
             ))}
-            <button type="submit" className="btn btn-success">{buttonText}</button>
+            <button type="submit" className="btn btn-success" style={{fontSize:"20px",fontWeight:"800"}}>{buttonText}</button>
         </form>
+        </div>
+        
     );
 };
 
