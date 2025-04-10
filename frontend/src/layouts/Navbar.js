@@ -68,6 +68,7 @@ export default function Navbar() {
             }
 
             <ul className="sidebar-links">
+            <li><a href="/events" style={{color:"green",fontSize:"18px",textDecoration:"none",fontWeight:"700"}}>Events</a></li>
               <li><a href="/localbusinesses" style={{color:"green",fontSize:"18px",textDecoration:"none",fontWeight:"700"}}>Businesses</a></li>
               <li><a href="/organizations" style={{color:"green",fontSize:"18px",textDecoration:"none",fontWeight:"700"}}>Organizations</a></li>
               <li><a href="/announcements" style={{color:"green",fontSize:"18px",textDecoration:"none",fontWeight:"700"}}>Announcements</a></li>

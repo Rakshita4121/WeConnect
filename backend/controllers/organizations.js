@@ -54,6 +54,18 @@ const organizationController = {
             console.error("Error updating organization:", error);
             res.status(500).json({ message: "Internal Server Error" });
         }
+    },
+    deleteOrganization: async (req,res)=>{
+        try{
+            const {id} = req.params;
+            const deletedOrganization = await OrganizationModel.findByIdAndDelete(id);
+            if(!deletedOrganization){
+                return res.status(404).json({ error: "Organization not found" });
+            }
+            res.status(200).json({ message: "Organization deleted successfully" });
+        }catch(err){
+            res.status(500).json({ error: "Internal Server Error" });
+        }
     }
 }
 

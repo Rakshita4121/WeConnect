@@ -1,43 +1,44 @@
-import React, { useState ,useContext} from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import image from "../assets/getimg_ai_img-GxykPKpPpM9MEvPRj0iYQ.jpeg";
 import { AuthContext } from "../context/AuthContext";
+
 function LogIn() {
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation(); // Get the previous location
     const [credentials, setCredentials] = useState({
         username: "",
         password: ""
     });
 
-    // Handle input changes
+    const from = location.state?.from || "/"; // Default redirect path is "/"
+
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
 
-    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await login(credentials);
             alert(response.message || "Login successful!");
-            if(response.success){
-                navigate("/"); 
-            }else{
+            if (response.success) {
+                navigate(from); // Redirect to where the user originally wanted to go
+            } else {
                 setCredentials({
                     username: "",
                     password: ""
-                })
+                });
             }
         } catch (error) {
             alert("Login failed! Invalid username or password.");
-
         }
     };
 
     return (
-        <div className='row' style={{ 
+        <div className='row' style={{
             padding: "110px 6%",
             background: `linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.7)), url(${image})`,
             backgroundRepeat: "no-repeat",

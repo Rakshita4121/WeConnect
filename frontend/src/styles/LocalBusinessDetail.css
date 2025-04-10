@@ -1,0 +1,154 @@
+.business-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    gap: 20px;
+   
+  }
+  
+  .business-info {
+    width: 100%;
+  }
+  
+  .business-info h2 {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .business-description {
+    font-size: 16px;
+    color: #555;
+    margin: 10px 0;
+  }
+  
+  .button-container {
+    margin-top: 10px;
+  }
+  
+  .edit-btn {
+    background: green;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .delete-btn {
+    background: red;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 5px;
+  }
+  
+  .business-carousel {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+  }
+  
+  .swiper-container {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .business-owner {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .business-owner h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  .available-jobs-section {
+    background-color: #ffffff;
+    margin-top: 50px;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.05);
+  }
+  
+  .available-jobs-heading {
+    font-size: 24px;
+    color: #1b5e20;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .available-jobs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .available-job-card {
+    background-color: #f9fff7;
+    border-left: 5px solid #66f56a;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  
+  .available-job-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 8px 20px rgba(76, 175, 80, 0.15);
+  }
+  
+  .job-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #2e7d32;
+  }
+  
+  .job-description {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #4e4e4e;
+  }
+  
+  .job-salary {
+    font-size: 15px;
+    color: #333;
+  }
+  
+  .no-jobs-text {
+    color: #888;
+    font-style: italic;
+  }
+  
+  .view-details-btn button {
+    font-size: 18px;
+    font-weight: 900;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+  
+  @media (max-width: 700px){
+      .business-container{
+          flex-wrap: wrap;
+      }
+  }

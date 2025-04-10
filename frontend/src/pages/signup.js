@@ -93,7 +93,9 @@ function SignUp() {
                             <option value="">Select a role</option>
                             <option value="Resident">Resident</option>
                             <option value="Community Head">Community Head</option>
-                            <option value="Organization Member">Organization Member</option>
+                            <option value="Organization Head">Organization Head</option>
+                            <option value="Business Head">Business Head</option>
+
                         </select>
                         <div className="invalid-feedback">Please select a role.</div>
                     </div>

@@ -8,4 +8,8 @@ router.route("/")
 router.route("/:id")
 .get(eventController.showEvent)
 .put(eventController.updateEvent)
+.delete(eventController.deleteEvent)
+router.route("/:id/reviews")
+.post(eventController.submitReview)
+.get(eventController.getReviews)
 module.exports=router;

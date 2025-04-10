@@ -1,0 +1,106 @@
+.job-details-container {
+    background-color: #f9f9f9;
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 0 15px rgba(0, 128, 0, 0.1);
+  }
+  
+  .job-details-container h2 {
+    font-size: 34px;
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .job-description {
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  
+  .job-section {
+    margin-bottom: 25px;
+  }
+  
+  .job-section h3 {
+    font-size: 22px;
+    color: #388e3c;
+    margin-bottom: 10px;
+  }
+  
+  .job-section ul {
+    padding-left: 20px;
+  }
+  
+  .job-section li {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+  
+  .job-salary {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    margin-top: 10px;
+  }
+  
+  .business-info {
+    background-color: #e8f5e9;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+    border-left: 5px solid #66bb6a;
+  }
+  
+  .business-info p {
+    margin: 6px 0;
+    font-size: 16px;
+  }
+  
+  .applications-section {
+    background-color: #ffffff;
+    margin-top: 50px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 10px 20px rgba(0, 128, 0, 0.07);
+  }
+  
+  .applications-section h3 {
+    font-size: 24px;
+    color: #1b5e20;
+    margin-bottom: 20px;
+  }
+  
+  .application-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .application-item {
+    background-color: #f1f8e9;
+    border-left: 4px solid #81c784;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .application-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 5px 15px rgba(76, 175, 80, 0.2);
+  }
+  
+  .application-item p {
+    margin: 5px 0;
+    font-size: 15.5px;
+  }
+  .apply-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 30px;
+  }
+  
