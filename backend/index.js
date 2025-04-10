@@ -18,7 +18,8 @@ const sessionOptions={
         expires:Date.now()+7*24*60*60*1000,
         maxAge:7*24*60*60*1000,
         httpOnly:true,
-        sameSite: "none"
+        sameSite: "lax",
+        secure: false
     }
 }
 app.use(session(sessionOptions))
@@ -43,12 +44,16 @@ const localbusinesses = require("../backend/routes/localbusinesses");
 const announcements = require("../backend/routes/announcements")
 const news=require("../backend/routes/news")
 const users=require("../backend/routes/users")
+const registrations=require("../backend/routes/registrations")
+const jobs=require("../backend/routes/jobs")
 app.use("/events",events)
 app.use("/organizations",organizations)
 app.use("/localbusinesses",localbusinesses);
 app.use("/news",news)
 app.use("/announcements",announcements)
 app.use("/auth",users)
+app.use("/",registrations)
+app.use("/jobs",jobs)
 app.listen(PORT , ()=>{
     console.log("App Started!")
     mongoose.connect(uri);

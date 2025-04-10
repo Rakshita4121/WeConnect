@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import image from "../../assets/getimg_ai_img-GxykPKpPpM9MEvPRj0iYQ.jpeg"
+import {AuthContext} from "../../context/AuthContext"
+
 const CreateOrganizationForm = () => {
     const navigate = useNavigate();
+    const {user} = useContext(AuthContext)
 
     const [orgData, setOrgData] = useState({
         name: '',
+        createdBy:user._id,
+        shortDescription:'',
         description: '',
         contactEmail: '',
         contactPhone: '',
@@ -66,7 +71,11 @@ const CreateOrganizationForm = () => {
                         <input name="name" id="name" type="text" className="form-control input-border" placeholder="Enter organization name" value={orgData.name} onChange={handleChange} required                             style={{border:"1px solid black",color:"green",fontWeight:"800",fontSize:"18px"}}
 />
                     </div>
-
+                    <div className="mb-3">
+                        <label htmlFor="shortdescription" className="form-label form-font"> Short Description</label>
+                        <textarea name="shortDescription" id="shortdescription" className="form-control input-border" placeholder="Enter organization short description" value={orgData.shortDescription} onChange={handleChange} required                             style={{border:"1px solid black",color:"green",fontWeight:"800",fontSize:"18px"}}
+/>
+                    </div>
                     <div className="mb-3">
                         <label htmlFor="description" className="form-label form-font">Description</label>
                         <textarea name="description" id="description" className="form-control input-border" placeholder="Enter organization description" value={orgData.description} onChange={handleChange} required                             style={{border:"1px solid black",color:"green",fontWeight:"800",fontSize:"18px"}}

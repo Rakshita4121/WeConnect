@@ -8,4 +8,5 @@ router.route("/")
 router.route("/:id")
 .get(organizationController.showOrganization)
 .put(organizationController.updateOrganization)
+.delete(organizationController.deleteOrganization)
 module.exports=router;

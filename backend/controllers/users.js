@@ -11,18 +11,31 @@ const userController = {
              res.status(500).json({ message: error.message });
         }
       },
-      login: async (req,res)=> {
-        res.json({ message: "Logged in", user: req.user });
-      },
+      login: async (req, res) => {
+        req.login(req.user, (err) => {
+            if (err) return res.status(500).json({ message: "Login failed" });
+            req.session.save(() => { // 👈 Ensures session is persisted
+                res.json({ message: "Logged in", user: req.user });
+            });
+        });
+    },
+    
       getUserData :  (req, res) => {
         res.json(req.user || null);
       },
-      logout: async (req,res)=>{
+      logout: async (req, res) => {
         req.logout((err) => {
             if (err) return res.status(500).json({ message: "Logout failed" });
-            res.json({ message: "Logged out" });
-          });
-      }
+    
+            req.session.destroy((err) => {
+                if (err) return res.status(500).json({ message: "Session destroy failed" });
+    
+                res.clearCookie("connect.sid", { path: "/" }); // 👈 Clears the session cookie
+                res.json({ message: "Logged out successfully" });
+            });
+        });
+    }
+    
 }
 
 module.exports = userController;

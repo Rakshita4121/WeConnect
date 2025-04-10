@@ -1,0 +1,83 @@
+.organization-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background: #fff;
+  }
+  
+  .organization-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .organization-text {
+    flex: 1;
+  }
+  
+  .organization-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #004d00;
+  }
+  
+  .organization-short-desc {
+    font-size: 18px;
+    font-weight: bold;
+    color: #006400;
+  }
+  
+  .organization-desc {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+  }
+  
+  .organization-image {
+    flex-shrink: 0;
+  }
+  
+  .org-img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .organization-details {
+    margin-top: 40px;
+    box-shadow: 0px 4px 8px rgba(0, 128, 0, 0.3);
+    padding: 5%;
+  }
+  
+  .organization-details p {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .organization-actions {
+    margin-top: 20px;
+  }
+  
+  .btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .btn-success {
+    background-color: #008000;
+    color: white;
+  }
+  
+  .btn-danger {
+    background-color: #ff0000;
+    color: white;
+  }
+  

@@ -3,7 +3,7 @@ import homeabout from '../../assets/homeabout.jpg';
 
 function Features() {
     return ( 
-        <div style={{marginTop:"50px",backgroundColor:"white"}}>
+        <div style={{marginTop:"50px"}}>
             <div className='features-container'>
                <div >
                    <h1>Get the most of your community with WeConnect</h1>
