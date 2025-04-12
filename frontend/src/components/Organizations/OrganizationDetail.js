@@ -39,7 +39,8 @@ const OrganizationDetail = () => {
           <p className="organization-desc">{organization.description}</p>
         </div>
         <div className="organization-image">
-          <img src={organization.image} alt={organization.name} className="org-img" />
+          <img src={organization.image?.url} alt={organization.name} className="org-img"             style={{ maxWidth: "100%", height: "auto", display: "block" }}
+/>
         </div>
       </div>
 

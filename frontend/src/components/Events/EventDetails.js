@@ -10,15 +10,15 @@ const EventDetails = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showReviewForm, setShowReviewForm] = useState(false);
-  const [reviewData, setReviewData] = useState({
-    rating: 3,
-    comment: ""
-  });
+  const [reviewData, setReviewData] = useState({ rating: 3, comment: "" });
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     axios.get(`http://localhost:3002/events/${id}`)
-      .then((res) => setEvent(res.data))
+      .then((res) => {
+        console.log("Fetched Event:", res.data);
+        setEvent(res.data);
+      })
       .catch((error) => console.error("Error fetching event details:", error));
 
     axios.get(`http://localhost:3002/events/${id}/reviews`)
@@ -68,6 +68,9 @@ const EventDetails = () => {
 
   if (!event) return <p>Loading event details...</p>;
 
+  const imageUrl = event.bannerImage?.url;
+  console.log("Image URL:", imageUrl);
+
   return (
     <div className="event-container" style={{ marginTop: "100px" }}>
       <h2 className="event-title" style={{ textAlign: "center", marginBottom: "20px" }}>
@@ -79,7 +82,11 @@ const EventDetails = () => {
           <p className="event-description">{event.description}</p>
         </div>
         <div className="event-banner">
-          <img src={event.bannerImage} alt={event.title} />
+          <img
+            src={imageUrl}
+            alt={event.title || "Event Banner"}
+            style={{ maxWidth: "100%", height: "auto", display: "block" }}
+          />
         </div>
       </div>
 
@@ -91,7 +98,7 @@ const EventDetails = () => {
         <p><strong>Volunteers Needed:</strong> {event.volunteersNeeded}</p>
         <p><strong>Registration Price:</strong> {event.registrationPrice > 0 ? `$${event.registrationPrice}` : "Free"}</p>
         <p><strong>Status:</strong> {event.status}</p>
-        <p><strong>Organized By:</strong> {event.organizedBy ? event.organizedBy : "N/A"} </p>
+        <p><strong>Organized By:</strong> {event.organizedBy ? event.organizedBy : "N/A"}</p>
         <p><strong>Contact No:</strong> {event.contactPhone}</p>
       </div>
 
@@ -103,13 +110,15 @@ const EventDetails = () => {
           <button className="delete-btn" onClick={handleDelete}>Delete</button>
         </div>
       )}
-    {(!isAdmin) && (
-      <div className="button-container">
-        <Link to={`/events/${id}/register`}>
-          <button className="btn btn-success">Register As Volunteer</button>
-        </Link>
-      </div>
-    )}
+
+      {(!isAdmin) && (
+        <div className="button-container">
+          <Link to={`/events/${id}/register`}>
+            <button className="btn btn-success">Register As Volunteer</button>
+          </Link>
+        </div>
+      )}
+
       {reviews.length > 0 && (
         <div>
           <h2 style={{ color: "darkgreen", textAlign: "center", fontWeight: "bold" }}>Reviews</h2>
@@ -125,49 +134,50 @@ const EventDetails = () => {
         </div>
       )}
 
-      <div className="review-section">
-        <button
-          className="add-review-btn btn btn-outline-success mb-3 mt-3"
-          onClick={() => setShowReviewForm(!showReviewForm)}
-        >
-          {showReviewForm ? "Cancel Review" : "Add Review"}
-        </button>
+      {user && (
+        <div className="review-section">
+          <button
+            className="add-review-btn btn btn-outline-success mb-3 mt-3"
+            onClick={() => setShowReviewForm(!showReviewForm)}
+          >
+            {showReviewForm ? "Cancel Review" : "Add Review"}
+          </button>
 
-        {showReviewForm && (
-          <div className="review-container">
-            <h3 className="review-heading">Leave A Review</h3>
-            <form className="review-form" onSubmit={handleReviewSubmit}>
-              <div className="form-group">
-                <label htmlFor="rating" className="form-label">Rating</label>
-                <input
-                  type="range"
-                  min="1"
-                  max="5"
-                  id="rating"
-                  name="rating"
-                  value={reviewData.rating}
-                  onChange={handleReviewChange}
-                  className="form-range"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="comment" className="form-label">Comment</label>
-                <textarea
-                  name="comment"
-                  id="comment"
-                  cols="30"
-                  rows="3"
-                  value={reviewData.comment}
-                  onChange={handleReviewChange}
-                  className="form-textarea form-control"
-                />
-              </div>
-              <button type="submit" className="submit-btn btn btn-success">Submit</button>
-            </form>
-          </div>
-        )}
-      </div>
-
+          {showReviewForm && (
+            <div className="review-container">
+              <h3 className="review-heading">Leave A Review</h3>
+              <form className="review-form" onSubmit={handleReviewSubmit}>
+                <div className="form-group">
+                  <label htmlFor="rating" className="form-label">Rating</label>
+                  <input
+                    type="range"
+                    min="1"
+                    max="5"
+                    id="rating"
+                    name="rating"
+                    value={reviewData.rating}
+                    onChange={handleReviewChange}
+                    className="form-range"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="comment" className="form-label">Comment</label>
+                  <textarea
+                    name="comment"
+                    id="comment"
+                    cols="30"
+                    rows="3"
+                    value={reviewData.comment}
+                    onChange={handleReviewChange}
+                    className="form-textarea form-control"
+                  />
+                </div>
+                <button type="submit" className="submit-btn btn btn-success">Submit</button>
+              </form>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

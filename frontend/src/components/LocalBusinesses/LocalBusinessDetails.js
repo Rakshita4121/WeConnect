@@ -65,7 +65,8 @@ const LocalBusinessDetail = () => {
             <Swiper navigation={true} modules={[Navigation]} className="swiper-container">
               {business.images.map((image, index) => (
                 <SwiperSlide key={index}>
-                  <img src={image} alt={`Slide ${index + 1}`} className="carousel-image" />
+                  <img src={image.url} alt={`Slide ${index + 1}`} className="carousel-image"             style={{ maxWidth: "100%", height: "auto", display: "block" }}
+/>
                 </SwiperSlide>
               ))}
             </Swiper>

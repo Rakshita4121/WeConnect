@@ -4,7 +4,7 @@ const AnnouncementSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   datePosted: { type: Date, default: Date.now }, 
-  postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", default:null }, 
+  postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required:true }, 
   category: { 
     type: String, 
     enum: ["Business", "Events", "General", "Opportunities"], 

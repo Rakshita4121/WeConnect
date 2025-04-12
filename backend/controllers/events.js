@@ -16,44 +16,60 @@ const eventController = {
     },
     createEvent : async (req, res) => {
         try {
-            const {
-                title,
-                shortDescription,
-                description,
-                eventType,
-                date,
-                time,
-                location,
-                volunteersNeeded,
-                bannerImage,
-                registrationPrice,
-                status,organizedBy
-            } = req.body;
-            const newEvent = new EventModel({
-                title,
-                shortDescription,
-                description,
-                eventType,
-                date,
-                time,
-                location,
-                volunteersNeeded,
-                bannerImage,
-                registrationPrice,
-                status: status || "upcoming",
-                organizedBy
-            });
-            const savedEvent = await newEvent.save();
-            res.status(201).json({ 
-                message: "Event created successfully!", 
-                event: savedEvent,
-                redirectUrl: "/events"  
-            });
+          const {
+            title,
+            shortDescription,
+            description,
+            eventType,
+            organizationId,
+            date,
+            time,
+            location,
+            volunteersNeeded,
+            registrationPrice,
+            status,
+            organizedBy
+          } = req.body;
+      
+          // Make sure multer has processed the file
+          const file = req.file;
+          if (!file) {
+              console.log(file)
+              console.log(req.body)
+            return res.status(400).json({ message: "Banner image is required" });
+          }
+      
+          const newEvent = new EventModel({
+            title,
+            shortDescription,
+            description,
+            eventType,
+            organizationId: organizationId || null,
+            date,
+            time,
+            location,
+            volunteersNeeded,
+            registrationPrice,
+            status,
+            organizedBy,
+            bannerImage: {
+              url: file.path,
+              filename: file.filename
+            }
+          });
+      
+          await newEvent.save();
+      
+          res.status(201).json({
+            message: "Event created successfully",
+            event: newEvent,
+            redirectUrl: `/events/${newEvent._id}`
+          });
         } catch (error) {
-            console.error("Error adding event:", error);
-            res.status(500).json({ message: "Error adding event", error: error.message });
+          console.error("Error adding event:", error);
+          res.status(500).json({ message: "Server error while creating event" });
         }
-    },
+      },
     updateEvent: async (req, res) => {
         try {
             const { id } = req.params;
