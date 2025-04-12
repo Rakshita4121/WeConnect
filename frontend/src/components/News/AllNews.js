@@ -63,7 +63,11 @@ const AllNews = () => {
       <div key={article._id} className="news-card">
       {article.image && (
         <div className="news-image">
-          <img src={image} alt="News" />
+          <img
+            src={article.image?.url}
+            alt={article.headline || "news image"}
+            style={{ maxWidth: "100%", height: "auto", display: "block" }}
+          />
         </div>
       )}
       <div className="news-content">

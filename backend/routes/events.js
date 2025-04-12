@@ -1,10 +1,13 @@
 const express=require("express");
 const router=express.Router();
+const multer = require("multer")
+const {storage} = require("../cloudConfig")
+const upload = multer({storage});
 const EventModel = require ("../models/EventsModel");
 const eventController=require("../controllers/events");
 router.route("/")
 .get(eventController.index)
-.post(eventController.createEvent)
+.post( upload.single('bannerImage'),eventController.createEvent)
 router.route("/:id")
 .get(eventController.showEvent)
 .put(eventController.updateEvent)

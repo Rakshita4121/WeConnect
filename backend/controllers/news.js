@@ -12,7 +12,17 @@ let newsController={
       },
       createNews: async (req,res)=>{
           try{
+            const file = req.file;
+            let url=req.file.path
+            let filename=req.file.filename
+            if (!file) {
+                console.log(file)
+                console.log(req.body)
+              return res.status(400).json({ message: "image is required" });
+            }
+        
               const newNews=new NewsModel(req.body);
+              newNews.image={url,filename}
               let savedNews=await newNews.save();
               res.status(202).json({message:"News Succesfully Created"})
           }catch(error){

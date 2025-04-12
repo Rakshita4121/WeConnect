@@ -70,19 +70,61 @@ const localbusinessController ={
             res.status(500).json({ message: "Failed to fetch business details" });
         }
     },
-    createBusiness: async (req,res)=>{
-        try{
-            let newbusiness = new LocalBusinessModel(req.body);
-            await newbusiness.save()
+    createBusiness: async (req, res) => {
+        try {
+            const {
+                name,
+                shortDescription,
+                description,
+                contactEmail,
+                contactPhone,
+                website,
+                address,
+                ownerId
+            } = req.body;
+            console.log("Files received:", req.files);
+
+            // Extract uploaded files
+            const logoFile = req.files?.logo?.[0];
+            const imageFiles = req.files?.images || [];
+    
+            // Format the logo and images according to schema
+            const logo = logoFile ? {
+                url: logoFile.path,
+                filename: logoFile.filename
+            } : null;
+    
+            const images = imageFiles.map(file => ({
+                url: file.path,
+                filename: file.filename
+            }));
+    
+            const newBusiness = new LocalBusinessModel({
+                name,
+                shortDescription,
+                description,
+                contactEmail,
+                contactPhone,
+                website,
+                address,
+                ownerId,
+                logo,
+                images
+            });
+    
+            await newBusiness.save();
+    
             res.status(202).json({
                 message: "Local Business created successfully!",
-                business: newbusiness,
+                business: newBusiness
             });
-        }catch(error){
+    
+        } catch (error) {
             console.error("Error creating business:", error);
             res.status(500).json({ error: "Internal Server Error" });
         }
     },
+    
     updateBusiness: async (req, res) => {
         try {
             const { id } = req.params;

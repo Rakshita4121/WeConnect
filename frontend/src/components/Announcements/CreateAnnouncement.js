@@ -2,8 +2,11 @@ import React from "react";
 import axios from "axios";
 import FormComponent from "../genral/Form";
 import image from "../../assets/getimg_ai_img-GxykPKpPpM9MEvPRj0iYQ.jpeg"
-
+import {useContext} from 'react'
+import {AuthContext} from "../../context/AuthContext"
 const CreateAnnouncementsForm = () => {
+    const { user } = useContext(AuthContext);
+
     const initialState = {
         title: "",
         description: "",
@@ -23,7 +26,7 @@ const CreateAnnouncementsForm = () => {
 
     const handleSubmit = async (formData) => {
         try {
-            await axios.post("http://localhost:3002/announcements", formData, {
+            await axios.post("http://localhost:3002/announcements",{...formData,postedBy:user._id}, {
                 headers: { "Content-Type": "application/json" }
             });
             alert("Announcement created successfully!");

@@ -8,8 +8,15 @@ const LocalBusinessSchema = new mongoose.Schema({
   contactEmail: { type: String, required: true },
   contactPhone: { type: String, required: true },
   website: { type: String },
-  logo: { type: String },
-  images: { type: [String], default: [] },
+  logo: {url:String,
+    filename:String},
+  images: { type: [
+    {
+      url: String,
+      filename: String
+    }
+  ],
+  default: [] },
   address: { type: String, required: true },
   jobs:[{type:mongoose.Schema.Types.ObjectId, ref: "Job",default:null}],
   createdAt: { type: Date, default: Date.now },

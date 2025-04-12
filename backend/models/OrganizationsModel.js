@@ -9,8 +9,10 @@ const OrganizationSchema = new mongoose.Schema({
   contactPhone: { type: String, required: true },
   address: { type: String, required: true },
   website: { type: String },
-  logo: { type: String },
-  image: { type: String }, // New image field
+  logo: {url:String,
+    filename:String },
+  image: {url:String,
+    filename:String }, // New image field
   foundedBy: [{ type: String }],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },

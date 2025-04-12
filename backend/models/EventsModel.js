@@ -11,7 +11,10 @@ const EventSchema = new mongoose.Schema({
     location: { type: String, required: true },
     volunteersNeeded: { type: Number, default: 0 },
     volunteerRegistrations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'VolunteerRegistration' }],
-    bannerImage: { type: String }, 
+    bannerImage: {
+        url:String,
+        filename:String
+    }, 
     registrationPrice: { type: Number, default: 0 }, 
     status: { type: String, enum: ['upcoming', 'ongoing', 'completed', 'canceled'], default: 'upcoming' },
     organizedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User',required: true }, 

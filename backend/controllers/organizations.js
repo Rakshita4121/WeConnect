@@ -16,13 +16,26 @@ const organizationController = {
     },
     createOrganization: async (req, res) => {
         try {
+            const { files, body } = req;
+    
             const newOrganization = new OrganizationModel({
-                ...req.body,
-                foundedBy: req.body.foundedBy.split(",").map(name => name.trim()), // Convert string to array
+                ...body,
+                foundedBy: body.foundedBy.split(",").map(name => name.trim()),
+    
+                // Save Cloudinary image details
+                logo: files.logo ? {
+                    url: files.logo[0].path,
+                    filename: files.logo[0].filename
+                } : undefined,
+    
+                image: files.image ? {
+                    url: files.image[0].path,
+                    filename: files.image[0].filename
+                } : undefined
             });
-
+    
             await newOrganization.save();
-
+    
             res.status(201).json({
                 message: "Organization created successfully!",
                 organization: newOrganization,
@@ -32,6 +45,8 @@ const organizationController = {
             res.status(500).json({ error: "Internal Server Error" });
         }
     },
+    
+    
     updateOrganization : async (req, res) => {
         try {
             const organizationId = req.params.id;

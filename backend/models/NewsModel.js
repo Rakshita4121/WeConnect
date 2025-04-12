@@ -4,9 +4,10 @@ const NewsSchema = new mongoose.Schema({
   headline: { type: String, required: true },
   content: { type: String, required: true },
   author: { type: String, required: true },
-  postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", default:null }, 
+  postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required:true }, 
   datePublished: { type: Date, default: Date.now },
-  image: { type: String, required: false }, // Optional image URL
+  image: {url:String,
+    filename:String}, // Optional image URL
   category: { 
     type: String, 
     enum: ["Politics", "Business", "Sports", "Technology", "Health", "Entertainment", "General"], 

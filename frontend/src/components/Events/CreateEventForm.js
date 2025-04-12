@@ -30,7 +30,7 @@ const CreateEventForm = () => {
         { name: "time", label: "Event Time", type: "text", placeholder: "Enter event time" },
         { name: "location", label: "Location", type: "text", placeholder: "Enter location" },
         { name: "volunteersNeeded", label: "Volunteers Needed", type: "number", placeholder: "Enter number" },
-        { name: "bannerImage", label: "Banner Image URL", type: "text", placeholder: "Enter image URL" },
+        { name: "bannerImage", label: "Banner Image URL", type: "file", placeholder: "Enter image URL" },
         { name: "registrationPrice", label: "Registration Price", type: "number", placeholder: "Enter price (0 if free)" }
     ];
 
@@ -39,15 +39,26 @@ const CreateEventForm = () => {
             alert("User not authenticated. Please log in again.");
             return;
         }
-
+    
         try {
-            const response = await axios.post("http://localhost:3002/events", {
-                ...formData,
-                organizedBy: user._id
-            }, {
-                headers: { "Content-Type": "application/json" }
+            const formDataToSend = new FormData();
+    
+            for (let key in formData) {
+                if (key === "bannerImage" && formData[key] instanceof File) {
+                    formDataToSend.append("bannerImage", formData[key]); // send file
+                } else {
+                    formDataToSend.append(key, formData[key]);
+                }
+            }
+    
+            formDataToSend.append("organizedBy", user._id);
+    
+            const response = await axios.post("http://localhost:3002/events", formDataToSend, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
             });
-
+    
             alert(response.data.message);
             window.location.href = response.data.redirectUrl;
         } catch (error) {
@@ -55,7 +66,7 @@ const CreateEventForm = () => {
             alert("Failed to create event. Check console for more details.");
         }
     };
-
+    
     return (
         <div className='row top-conteiner' style={{
             padding: "110px 6%",
