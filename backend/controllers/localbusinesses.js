@@ -1,5 +1,7 @@
 const mongoose = require("mongoose")
 const LocalBusinessModel=require("../models/LocalBusinessesModel");
+const User = require("../models/UserModel");
+const webpush = require("../utils/push");
 const businesess=[
     {
       name: "Green Earth Initiative",
@@ -113,6 +115,21 @@ const localbusinessController ={
             });
     
             await newBusiness.save();
+            const users = await User.find({ "subscription.endpoint": { $exists: true } });
+    
+            const payload = JSON.stringify({
+                title: "🎉 New Business Added!",
+                body: `Don't miss out: ${newBusiness.name}`,
+                url: `/localbusinesses/${newBusiness._id}`
+            });
+    
+            users.forEach(user => {
+                if (user.subscription) {
+                    webpush.sendNotification(user.subscription, payload).catch(err => {
+                        console.error("Push error:", err);
+                    });
+                }
+            });
     
             res.status(202).json({
                 message: "Local Business created successfully!",

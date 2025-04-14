@@ -12,4 +12,6 @@ router.route("/login")
 .post(passport.authenticate("local"),userController.login)
 router.route("/logout")
 .post(userController.logout)
+router.route("/subscribe")
+.post(userController.saveSubscription)
 module.exports=router;

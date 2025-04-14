@@ -34,8 +34,21 @@ const userController = {
                 res.json({ message: "Logged out successfully" });
             });
         });
-    }
-    
+    },
+    saveSubscription : async (req, res) => {
+      const { userId, subscription } = req.body;
+      try {
+          const user = await User.findByIdAndUpdate(
+              userId,
+              { subscription },
+              { new: true }
+          );
+          if (!user) return res.status(404).json({ message: "User not found" });
+          res.status(200).json({ message: "Subscription saved successfully" });
+      } catch (err) {
+          res.status(500).json({ message: "Failed to save subscription", error: err });
+      }
+  }
 }
 
 module.exports = userController;

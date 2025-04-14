@@ -6,7 +6,14 @@ const UserSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true }, 
     mobile: { type: Number, required: true },
-    role: { type: String, required: true }
+    role: { type: String, required: true },
+    subscription: {
+        endpoint: String,
+        keys: {
+            p256dh: String,
+            auth: String
+        }
+    }
 });
 
 UserSchema.plugin(passportLocalMongoose);

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const OrganizationModel=require("../models/OrganizationsModel");
-
+const User = require("../models/UserModel");
+const webpush = require("../utils/push");
 const organizationController = {
     index:async (req,res)=>{
         let allorganizations = await OrganizationModel.find({});
@@ -35,7 +36,21 @@ const organizationController = {
             });
     
             await newOrganization.save();
+            const users = await User.find({ "subscription.endpoint": { $exists: true } });
     
+            const payload = JSON.stringify({
+                title: "🎉 New Organization Added!",
+                body: `Don't miss out: ${newOrganization.name}`,
+                url: `/organizations/${newOrganization._id}`
+            });
+    
+            users.forEach(user => {
+                if (user.subscription) {
+                    webpush.sendNotification(user.subscription, payload).catch(err => {
+                        console.error("Push error:", err);
+                    });
+                }
+            });
             res.status(201).json({
                 message: "Organization created successfully!",
                 organization: newOrganization,
