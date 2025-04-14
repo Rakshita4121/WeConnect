@@ -4,16 +4,20 @@ import axios from "axios";
 import image from "../assets/getimg_ai_img-GxykPKpPpM9MEvPRj0iYQ.jpeg";
 import { AuthContext } from "../context/AuthContext";
 
+// ✅ Import push subscription function
+import { subscribeUserToPush } from "../utils/subscribeUser";
+
 function LogIn() {
-    const { login } = useContext(AuthContext);
+    const { login,user } = useContext(AuthContext);
     const navigate = useNavigate();
-    const location = useLocation(); // Get the previous location
+    const location = useLocation();
+
     const [credentials, setCredentials] = useState({
         username: "",
         password: ""
     });
 
-    const from = location.state?.from || "/"; // Default redirect path is "/"
+    const from = location.state?.from || "/";
 
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -24,13 +28,14 @@ function LogIn() {
         try {
             const response = await login(credentials);
             alert(response.message || "Login successful!");
+            
             if (response.success) {
-                navigate(from); // Redirect to where the user originally wanted to go
+                // ✅ Subscribe user to push notifications after login
+                await subscribeUserToPush();
+
+                navigate(from);
             } else {
-                setCredentials({
-                    username: "",
-                    password: ""
-                });
+                setCredentials({ username: "", password: "" });
             }
         } catch (error) {
             alert("Login failed! Invalid username or password.");

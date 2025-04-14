@@ -1,6 +1,8 @@
 const mongoose = require("mongoose")
 const EventModel=require("../models/EventsModel");
 const Review = require("../models/ReviewsModel")
+const User = require("../models/UserModel");
+const webpush = require("../utils/push");
 const eventController = {
     index:async (req,res)=>{
         let allevents = await EventModel.find({});
@@ -14,62 +16,78 @@ const eventController = {
         }
         res.json(event);
     },
-    createEvent : async (req, res) => {
+    createEvent: async (req, res) => {
         try {
-          const {
-            title,
-            shortDescription,
-            description,
-            eventType,
-            organizationId,
-            date,
-            time,
-            location,
-            volunteersNeeded,
-            registrationPrice,
-            status,
-            organizedBy
-          } = req.body;
-      
-          // Make sure multer has processed the file
-          const file = req.file;
-          if (!file) {
-              console.log(file)
-              console.log(req.body)
-            return res.status(400).json({ message: "Banner image is required" });
-          }
-      
-          const newEvent = new EventModel({
-            title,
-            shortDescription,
-            description,
-            eventType,
-            organizationId: organizationId || null,
-            date,
-            time,
-            location,
-            volunteersNeeded,
-            registrationPrice,
-            status,
-            organizedBy,
-            bannerImage: {
-              url: file.path,
-              filename: file.filename
+            const {
+                title,
+                shortDescription,
+                description,
+                eventType,
+                organizationId,
+                date,
+                time,
+                location,
+                volunteersNeeded,
+                registrationPrice,
+                status,
+                organizedBy
+            } = req.body;
+    
+            const file = req.file;
+            if (!file) {
+                return res.status(400).json({ message: "Banner image is required" });
             }
-          });
-      
-          await newEvent.save();
-      
-          res.status(201).json({
-            message: "Event created successfully",
-            event: newEvent,
-            redirectUrl: `/events/${newEvent._id}`
-          });
+    
+            const newEvent = new EventModel({
+                title,
+                shortDescription,
+                description,
+                eventType,
+                organizationId: organizationId || null,
+                date,
+                time,
+                location,
+                volunteersNeeded,
+                registrationPrice,
+                status,
+                organizedBy,
+                bannerImage: {
+                    url: file.path,
+                    filename: file.filename
+                }
+            });
+    
+            await newEvent.save();
+    
+            // 🔔 Notify subscribed users
+            const users = await User.find({ "subscription.endpoint": { $exists: true } });
+    
+            const payload = JSON.stringify({
+                title: "🎉 New Event Added!",
+                body: `Don't miss out: ${newEvent.title}`,
+                url: `/events/${newEvent._id}`
+            });
+    
+            users.forEach(user => {
+                if (user.subscription) {
+                    webpush.sendNotification(user.subscription, payload).catch(err => {
+                        console.error("Push error:", err);
+                    });
+                }
+            });
+    
+            res.status(201).json({
+                message: "Event created successfully",
+                event: newEvent,
+                redirectUrl: `/events/${newEvent._id}`
+            });
+    
         } catch (error) {
-          console.error("Error adding event:", error);
-          res.status(500).json({ message: "Server error while creating event" });
+            console.error("Error adding event:", error);
+            res.status(500).json({ message: "Server error while creating event" });
         }
-      },
+    },
+    
     updateEvent: async (req, res) => {
         try {
             const { id } = req.params;

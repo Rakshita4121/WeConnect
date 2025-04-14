@@ -49,6 +49,7 @@ const news=require("../backend/routes/news")
 const users=require("../backend/routes/users")
 const registrations=require("../backend/routes/registrations")
 const jobs=require("../backend/routes/jobs")
+const notifications=require("../backend/routes/notifications")
 app.use("/events",events)
 app.use("/organizations",organizations)
 app.use("/localbusinesses",localbusinesses);
@@ -57,6 +58,8 @@ app.use("/announcements",announcements)
 app.use("/auth",users)
 app.use("/",registrations)
 app.use("/jobs",jobs)
+app.use('/notifications', notifications);
+
 app.listen(PORT , ()=>{
     console.log("App Started!")
     mongoose.connect(uri);

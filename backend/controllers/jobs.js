@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const Job = require("../models/JobsModel");
 const LocalBusiness = require("../models/LocalBusinessesModel")
 const JobRegistration = require("../models/JobRegistrationModel")
-
+const User = require("../models/UserModel");
+const webpush = require("../utils/push");
 const jobsController={
     postJob:async (req, res) => {
         try {
@@ -21,19 +22,35 @@ const jobsController={
     
             // Save job in database
             const savedJob = await newJob.save();
-    
+            const users = await User.find({ "subscription.endpoint": { $exists: true } });
+
             // Push job ID into LocalBusiness collection
             await LocalBusiness.findByIdAndUpdate(
                 businessId,
                 { $push: { jobs: savedJob._id } },
                 { new: true }
             );
+
+            const payload = JSON.stringify({
+                title: "🎉 New job Added!",
+                body: `Don't miss out: ${savedJob.title}`,
+                url: `/jobs/${savedJob._id}`
+            });
+    
+            users.forEach(user => {
+                if (user.subscription) {
+                    webpush.sendNotification(user.subscription, payload).catch(err => {
+                        console.error("Push error:", err);
+                    });
+                }
+            });
     
             res.status(201).json({ message: "Job posted successfully!", job: savedJob });
         } catch (error) {
             console.error("Error posting job:", error);
             res.status(500).json({ message: "Failed to post job", error: error.message });
         }
+
     },
     showJob: async (req, res) => {
         try {
